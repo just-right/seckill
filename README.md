@@ -1,6 +1,6 @@
 # 一、简易秒杀介绍
 
-&emsp;&emsp;基于Spring Boot+MyBatis+Redis+MySQL实现简易秒杀功能。
+&emsp;&emsp;基于Spring Boot+MyBatis+Redis+MySQL实现简易秒杀功能.
 
 - 使用EasyCode插件快速生成通用代码
 - 使用Lua脚本解决库存遗留问题
