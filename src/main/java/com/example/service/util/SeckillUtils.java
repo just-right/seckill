@@ -6,6 +6,7 @@ import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import com.example.controller.SeckillStatusEnum;
 import com.example.dao.SeckillSuccessDao;
 import com.example.dao.SeckillactivityDao;
+import com.example.entity.SeckillSuccess;
 import com.example.entity.Seckillactivity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -119,15 +120,15 @@ public class SeckillUtils {
                 //减库存
                 Integer productNum = seckillactivity.getSeckillnum();
 
-                seckillactivity.setSeckillnum(productNum.intValue()-1);
+                seckillactivity.setSeckillnum(productNum.intValue() - 1);
                 seckillactivityDao1.update(seckillactivity);
 
                 //插入秒杀成功记录
-//                    SeckillSuccess seckillSuccess = new SeckillSuccess();
-//                    seckillSuccess.setTelphone(telphone)
-//                        .setActivity(id)
-//                        .setProduct(seckillactivity.getProduct());
-//                    seckillSuccessDao1.insert(seckillSuccess);
+                SeckillSuccess seckillSuccess = new SeckillSuccess();
+                seckillSuccess.setTelphone(telphone)
+                        .setActivity(id)
+                        .setProduct(seckillactivity.getProduct());
+                seckillSuccessDao1.insert(seckillSuccess);
             }
 
             return SeckillStatusEnum.getEnumByCode(Integer.parseInt(stausCode.toString()));
