@@ -32,7 +32,7 @@ public class SeckillUtils {
     private static SeckillactivityDao seckillactivityDao1;
     private static SeckillSuccessDao seckillSuccessDao1;
     private static JedisPool jedisPool1;
-
+    private static Lock lock = new ReentrantLock();
     private static RuntimeSchema<Seckillactivity> schema = RuntimeSchema.createFrom(Seckillactivity.class);
 
     @Autowired
@@ -91,8 +91,9 @@ public class SeckillUtils {
      * @return
      */
     @Transactional
-    public static synchronized SeckillStatusEnum doSecKill(Integer id, String telphone) {
+    public static  SeckillStatusEnum doSecKill(Integer id, String telphone) {
 
+        lock.lock();
         String luaScript = "local productStockKey='produt:'..KEYS[1]..\":stock\";\r\n" +
                 "local key='seckill:'..KEYS[1]..\":success\";\r\n" +
                 "local value='seckill:'..KEYS[2]..\":success\";\r\n" +
@@ -136,6 +137,9 @@ public class SeckillUtils {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            lock.unlock();
         }
         return SeckillStatusEnum.getEnumByCode(100);
 
