@@ -4,7 +4,7 @@
 
 - 使用EasyCode插件快速生成通用代码
 - 使用Lua脚本解决库存遗留问题
-- 使用ZSet类型解决重复秒杀
+- 使用Set类型解决重复秒杀
 - 使用ProtostuffIOUtil序列化对象
 - 使用Jmeter工具测试秒杀
 
